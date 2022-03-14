@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
-import { Header } from './Header'
+import {Header} from './Header'
 
 export interface PageProps {
   user?: {}
