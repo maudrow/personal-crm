@@ -3,7 +3,7 @@ import React from 'react'
 import {Button} from './Button'
 
 export interface HeaderProps {
-  user?: {}
+  user?: Record<string, unknown>
   onLogin: () => void
   onLogout: () => void
   onCreateAccount: () => void
