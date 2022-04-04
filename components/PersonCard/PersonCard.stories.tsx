@@ -38,7 +38,7 @@ NamePhoneAndEmail.args = {
 }
 
 export const NamePhoneEmailAndBirthday = Template.bind({})
-NamePhoneAndEmail.args = {
+NamePhoneEmailAndBirthday.args = {
   name: 'Audrow',
   phoneNumber: '555-555-5555',
   email: 'audrow@hey.com',
