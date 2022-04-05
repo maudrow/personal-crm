@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react'
-import { supabase } from '../utils/supabase-client'
-import Auth from '../components/Auth'
+import type {Session} from '@supabase/supabase-js'
+import {useEffect, useState} from 'react'
 import Account from '../components/Account'
-import type { Session } from '@supabase/supabase-js'
+import Auth from '../components/Auth'
+import {supabase} from '../utils/supabase-client'
 
 export default function Home() {
-  const [session, setSession] = useState<Session|null>()
+  const [session, setSession] = useState<Session | null>()
 
   useEffect(() => {
     const session = supabase.auth.session()
@@ -17,8 +17,12 @@ export default function Home() {
   }, [])
 
   return (
-    <div className="container" style={{ padding: '50px 0 100px 0' }}>
-      {!session ? <Auth /> : <Account key={session.user?.id} session={session} />}
+    <div className="container" style={{padding: '50px 0 100px 0'}}>
+      {!session ? (
+        <Auth />
+      ) : (
+        <Account key={session.user?.id} session={session} />
+      )}
     </div>
   )
 }
