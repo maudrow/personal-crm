@@ -12,6 +12,15 @@ Some things that are on the horizon for me in terms of learning:
 - Testing visual components
   - Integration testing with Cypress
 
+From a process point of view, it would be worth figuring out how I can setup authentication so that I don't have to change the URL for my local site. Perhaps I will start with this task next time.
+
+In summary:
+
+- Allow email and password login
+- Connect contacts to notes
+- Make contacts and notes editable
+- Add tags to contacts and notes
+
 ## 2022-04-04
 
 There are a few ways that I can proceed with this project, since there are a few parts in parallel.
