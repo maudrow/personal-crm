@@ -2,6 +2,7 @@ import type {Session} from '@supabase/supabase-js'
 import {useEffect, useState} from 'react'
 import {supabase} from '../utils/supabase-client'
 import Avatar from './Avatar'
+import Contact from './Contact'
 
 export default function Account({session}: {session: Session}) {
   const [loading, setLoading] = useState(true)
@@ -13,19 +14,19 @@ export default function Account({session}: {session: Session}) {
     getProfile()
   }, [session])
 
+  const user = supabase.auth.user()
+  if (!user) {
+    throw new Error('User not found')
+  }
+
   async function getProfile() {
     try {
       setLoading(true)
-      const user = supabase.auth.user()
-
-      if (!user) {
-        throw new Error('User not found')
-      }
 
       const {data, error, status} = await supabase
         .from('profiles')
         .select(`username, website, avatar_url`)
-        .eq('id', user.id)
+        .eq('id', user?.id)
         .single()
 
       if (error && status !== 406) {
@@ -133,6 +134,7 @@ export default function Account({session}: {session: Session}) {
           Sign Out
         </button>
       </div>
+      <Contact user={user} />
     </div>
   )
 }
