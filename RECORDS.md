@@ -1,5 +1,17 @@
 # RECORDS
 
+## 2022-04-06
+
+I have basic contacts being stored and displayed. My next step is to make notes associated with contacts. It would then be good to allow contacts and notes to be updated.
+
+Once I have this pipeline, it would make sense to start breaking things down into views. I should figure out how best to represent this and how to plan for it.
+
+Some things that are on the horizon for me in terms of learning:
+
+- PostgresSQL, but get as far as I can without it
+- Testing visual components
+  - Integration testing with Cypress
+
 ## 2022-04-04
 
 There are a few ways that I can proceed with this project, since there are a few parts in parallel.
