@@ -10,40 +10,41 @@ export default function Account({session}: {session: Session}) {
   const [website, setWebsite] = useState('')
   const [avatar_url, setAvatarUrl] = useState('')
 
-  useEffect(() => {
-    getProfile()
-  }, [session])
-
   const user = supabase.auth.user()
+
+  useEffect(() => {
+    async function getProfile() {
+      try {
+        setLoading(true)
+
+        const { data, error, status } = await supabase
+          .from('profiles')
+          .select(`username, website, avatar_url`)
+          .eq('id', user?.id)
+          .single()
+
+        if (error && status !== 406) {
+          throw error
+        }
+
+        if (data) {
+          setUsername(data.username)
+          setWebsite(data.website)
+          setAvatarUrl(data.avatar_url)
+        }
+      } catch (error) {
+        alert((error as Error).message)
+      } finally {
+        setLoading(false)
+      }
+    }
+    getProfile()
+  }, [session, user?.id])
+
   if (!user) {
     throw new Error('User not found')
   }
 
-  async function getProfile() {
-    try {
-      setLoading(true)
-
-      const {data, error, status} = await supabase
-        .from('profiles')
-        .select(`username, website, avatar_url`)
-        .eq('id', user?.id)
-        .single()
-
-      if (error && status !== 406) {
-        throw error
-      }
-
-      if (data) {
-        setUsername(data.username)
-        setWebsite(data.website)
-        setAvatarUrl(data.avatar_url)
-      }
-    } catch (error) {
-      alert((error as Error).message)
-    } finally {
-      setLoading(false)
-    }
-  }
 
   async function updateProfile({
     username,

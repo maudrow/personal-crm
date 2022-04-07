@@ -1,20 +1,14 @@
 import type {User} from '@supabase/supabase-js'
 import {useEffect, useState} from 'react'
 import {supabase} from '../utils/supabase-client'
-
-type DbContact = {
-  id: string
-} & Contact
-
-type Contact = {
-  name: string
-  email?: string
-  phone?: string
-  address?: string
-  note_ids?: string[]
-}
+import ContactEntry from './ContactEntry'
+import type {Contact as ContactType, DbContact} from './__types__/Contact'
 
 export default function Contact({user}: {user: User}) {
+  if (!user) {
+    throw new Error('User not found')
+  }
+
   const [loading, setLoading] = useState(true)
   const [contacts, setContacts] = useState<DbContact[]>([])
   const [errorText, setErrorText] = useState('')
@@ -24,39 +18,36 @@ export default function Contact({user}: {user: User}) {
   const [address, setAddress] = useState('')
 
   useEffect(() => {
-    fetchContacts()
-  }, [])
+    const fetchContacts = async () => {
+      try {
+        setLoading(true)
 
-  const fetchContacts = async () => {
-    try {
-      setLoading(true)
+        const {
+          data: contacts,
+          error,
+          status,
+        } = await supabase
+          .from('contacts')
+          // .select('name, email, phone, address')
+          .select('*')
+          .eq('user_id', user.id)
+          .order('id', { ascending: true })
 
-      if (!user) {
-        throw new Error('User not found')
+        if (error && status !== 406) {
+          throw error
+        }
+        setContacts(contacts || [])
+      } catch (error) {
+        setErrorText((error as Error).message)
+      } finally {
+        console.log('should stop loading')
+        setLoading(false)
       }
-
-      const {
-        data: contacts,
-        error,
-        status,
-      } = await supabase
-        .from('contacts')
-        // .select('name, email, phone, address')
-        .select('*')
-        // .eq('user_id', user.id)
-        .order('id', {ascending: true})
-
-      if (error && status !== 406) {
-        throw error
-      }
-      setContacts(contacts || [])
-    } catch (error) {
-      setErrorText((error as Error).message)
-    } finally {
-      setLoading(false)
     }
-  }
-  const addContact = async (contact: Contact) => {
+    fetchContacts()
+  }, [user.id])
+
+  const addContact = async (contact: ContactType) => {
     const {data, error} = await supabase
       .from('contacts')
       .insert({...contact, user_id: user.id})
@@ -83,26 +74,13 @@ export default function Contact({user}: {user: User}) {
         {loading && <div>Loading...</div>}
         {errorText && <div>{errorText}</div>}
         {contacts.map((contact) => (
-          <div key={contact.id} className="w-1/2 md:w-1/3 p-2">
-            <div className="bg-gray-200 rounded-lg shadow-md p-4">
-              <div className="flex flex-row">
-                <div className="flex-1">
-                  <h3>{contact.name}</h3>
-                  <p>{contact.email}</p>
-                  <p>{contact.phone}</p>
-                  <p>{contact.address}</p>
-                </div>
-                <div className="flex-1">
-                  <button
-                    className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-                    onClick={() => deleteContact(contact.id)}
-                  >
-                    Delete
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
+          <ContactEntry
+            key={contact.id}
+            user={user}
+            contact={contact}
+            setErrorText={setErrorText}
+            deleteContact={deleteContact}
+          />
         ))}
       </div>
       <div className="flex flex-row flex-wrap">
