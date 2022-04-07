@@ -12,7 +12,7 @@
     "format": "npm run prettier -- --write",
     "check-format": "npm run prettier -- --list-different",
     "test": "jest",
-    "validate": "npm-run-all check-format lint build test build-storybook",
+    "validate": "npm-run-all check-format lint test build-storybook",
     "storybook": "start-storybook -p 6006 --no-dll",
     "build-storybook": "build-storybook --no-dll"
   },
