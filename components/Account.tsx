@@ -17,7 +17,7 @@ export default function Account({session}: {session: Session}) {
       try {
         setLoading(true)
 
-        const { data, error, status } = await supabase
+        const {data, error, status} = await supabase
           .from('profiles')
           .select(`username, website, avatar_url`)
           .eq('id', user?.id)
@@ -44,7 +44,6 @@ export default function Account({session}: {session: Session}) {
   if (!user) {
     throw new Error('User not found')
   }
-
 
   async function updateProfile({
     username,

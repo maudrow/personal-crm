@@ -31,7 +31,7 @@ export default function Contact({user}: {user: User}) {
           // .select('name, email, phone, address')
           .select('*')
           .eq('user_id', user.id)
-          .order('id', { ascending: true })
+          .order('id', {ascending: true})
 
         if (error && status !== 406) {
           throw error

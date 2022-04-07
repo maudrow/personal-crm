@@ -33,7 +33,7 @@ export default function ContactEntry({
           .select('*')
           .eq('user_id', user.id)
           .eq('contact_id', contact.id)
-          .order('id', { ascending: true })
+          .order('id', {ascending: true})
 
         if (error && status !== 406) {
           throw error
