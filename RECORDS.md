@@ -1,5 +1,29 @@
 # RECORDS
 
+## 2022-04-09 - Setup local development
+
+Today I got Supabase working the same on my machine and on the Supabase servers. This is awesome. I primarily followed [this](https://supabase.com/docs/guides/local-development) tutorial.
+
+Here is a summary:
+
+- Install Supabase following the instructions [here](https://supabase.com/docs/reference/cli/installing-and-updating)
+- Use `supabase init` and `supabase start` to run. The URLs to use to access various things are given by `supabase start`.
+- Connect your local DB to the Supabase one with [this](https://supabase.com/docs/guides/local-development#linking-your-project) tutorial.
+- Workflow
+  - Make changes to the database through the GUI or SQL scripts.
+  - Use `supabase db commit commit_name` to generate a migration diff.
+  - Update your remote repo with `supabase db push`
+- You can also reset the database to the last migration with `supabase db reset` and [seed the database](https://supabase.com/docs/guides/local-development#making-database-changes) with a `supabase/seed.sql` file.
+
+My next steps are to
+
+- Restructure the application in terms of components
+- Add storyboards for the components
+- Add stripe integration
+- Add unit tests
+- Add integration tests
+- Make things better looking
+
 ## 2022-04-06
 
 I have basic contacts being stored and displayed. My next step is to make notes associated with contacts. It would then be good to allow contacts and notes to be updated.
