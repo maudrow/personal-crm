@@ -1,5 +1,9 @@
 # RECORDS
 
+## 2022-04-11 - Integration testing
+
+A recent experience in another repo showed that a dependency broke the main repo script, but this breaking change wasn't caught in CI. It occurs to me that this should have been caught with integration tests. I should add integration tests here and in every other repo that I'm working with.
+
 ## 2022-04-09 - Setup local development
 
 Today I got Supabase working the same on my machine and on the Supabase servers. This is awesome. I primarily followed [this](https://supabase.com/docs/guides/local-development) tutorial.
