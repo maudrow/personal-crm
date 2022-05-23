@@ -26,7 +26,7 @@
     "@babel/core": "^7.18.0",
     "@storybook/addon-actions": "^6.5.4",
     "@storybook/addon-essentials": "^6.4.22",
-    "@storybook/addon-links": "^6.5.3",
+    "@storybook/addon-links": "^6.5.4",
     "@storybook/react": "^6.1.11",
     "@styled-jsx/plugin-sass": "^4.0.2",
     "@testing-library/jest-dom": "^5.16.4",
@@ -36,7 +36,7 @@
     "@types/react-dom": "^18.0.3",
     "@typescript-eslint/eslint-plugin": "^5.25.0",
     "babel-loader": "^8.2.5",
-    "eslint": "^8.15.0",
+    "eslint": "^8.16.0",
     "eslint-config-next": "^12.1.6",
     "eslint-plugin-storybook": "^0.5.12",
     "husky": "^8.0.1",
@@ -47,7 +47,7 @@
     "prettier": "^2.6.2",
     "prettier-plugin-organize-imports": "^2.3.4",
     "react-is": "^18.1.0",
-    "sass": "^1.51.0",
+    "sass": "^1.52.1",
     "tailwindcss": "^3.0.23",
     "typescript": "^4.6.4"
   }
