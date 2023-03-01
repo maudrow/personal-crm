@@ -37,7 +37,7 @@
     "@typescript-eslint/eslint-plugin": "^5.54.0",
     "babel-loader": "^8.2.5",
     "eslint": "^8.35.0",
-    "eslint-config-next": "^13.2.1",
+    "eslint-config-next": "^13.2.3",
     "eslint-plugin-storybook": "^0.6.11",
     "husky": "^8.0.3",
     "jest": "^27.5.1",
